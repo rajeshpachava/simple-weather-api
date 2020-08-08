@@ -17,7 +17,7 @@
     - curl -X PUT -H 'Content-Type: application/json' -H 'Authorization: Basic ZGVtbzpkZW1v' -i 'http://localhost:8080/weather/add?zipcode=524121&date=2019-12-28&temperature=140.0'
   * Retrieve weather info by zipcode and date
     - curl -X GET -H 'Authorization: Basic ZGVtbzpkZW1v' -i 'http://localhost:8080/weather/fetchByZipcodeAndDate?zipcode=524121&date=2019-12-28'
-      {"id":1,"date":"2019-12-28","temperature":140.0}
+      - Output: {"id":1,"date":"2019-12-28","temperature":140.0}
   * Retrieve weather info by zipcode and in between startDate and endDate
     - curl -X GET -H 'Authorization: Basic ZGVtbzpkZW1v' -i 'http://localhost:8080/weather/fetchAllByZipcodeBetweenDates?zipcode=524121&startDate=2019-12-27&
-      {"content":[{"id":2,"date":"2019-12-29","temperature":110.0}],"pageable":{"sort": {"unsorted":false,"sorted":true,"empty":false},"pageNumber":0,"pageSize":1,"offset":0,"paged":true,"unpaged":false},"totalElements":2,"totalPages":2,"last":false,"first":true,"sort":{"unsorted":false,"sorted":true,"empty":false},"numberOfElements":1,"size":1,"number":0,"empty":false}
+      - Output: {"content":[{"id":2,"date":"2019-12-29","temperature":110.0}],"pageable":{"sort": {"unsorted":false,"sorted":true,"empty":false},"pageNumber":0,"pageSize":1,"offset":0,"paged":true,"unpaged":false},"totalElements":2,"totalPages":2,"last":false,"first":true,"sort":{"unsorted":false,"sorted":true,"empty":false},"numberOfElements":1,"size":1,"number":0,"empty":false}
