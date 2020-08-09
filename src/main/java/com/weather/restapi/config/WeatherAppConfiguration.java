@@ -41,10 +41,6 @@ public class WeatherAppConfiguration {
 		ClientHttpRequestFactory requestFactory = getClientHttpRequestFactory();
 		restTemplate.setRequestFactory(requestFactory);
 
-//		ObjectMapper mapper = new ObjectMapper();
-//		mapper.configure(MapperFeature.ACCEPT_CASE_INSENSITIVE_PROPERTIES, true);
-//		mapper.enable(DeserializationFeature.ACCEPT_EMPTY_STRING_AS_NULL_OBJECT);
-//		restTemplate.setMessageConverters(getMessageConverters(mapper));
 		return restTemplate;
 	}
 
