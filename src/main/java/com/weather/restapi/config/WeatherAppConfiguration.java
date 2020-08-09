@@ -25,9 +25,13 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Configuration
+@PropertySource("classpath:application.properties")
 public class WeatherAppConfiguration {
 
 	private static final Logger log = LoggerFactory.getLogger(MethodHandles.lookup().lookupClass());
+
+	@Value("${openweathermap.integration.enaled}")
+	private boolean integrationEnabled;
 
 	@Autowired
 	WeatherUpdaterService weatherUpdaterService;
@@ -47,12 +51,16 @@ public class WeatherAppConfiguration {
 	/*The weather details for all the valid locations are updated for every hour*/
 	@Scheduled(initialDelay = 60_000, fixedRate = 36_00_000)
 	public void triggerWeatherDetailsUpdate() {
-		int pageNumber = 0;
-		Page<Location> locations = locationRepository.findAll(PageRequest.of(pageNumber, 20));
-		while (locations.getNumberOfElements() > 0) {
-			//TODO: Create threadpool executor service and submit tasks to execute in parallel
-			weatherUpdaterService.updateWeatherDetails(locations.get());
-			locations = locationRepository.findAll(PageRequest.of(pageNumber + 1, 20));
+		if (integrationEnabled) {
+			int pageNumber = 0;
+			Page<Location> locations = locationRepository.findAll(PageRequest.of(pageNumber, 20));
+			while (locations.getNumberOfElements() > 0) {
+				//TODO: Create threadpool executor service and submit tasks to execute in parallel
+				weatherUpdaterService.updateWeatherDetails(locations.get());
+				locations = locationRepository.findAll(PageRequest.of(pageNumber + 1, 20));
+			}
+		} else {
+			log.info("The integration with 'api.openweathermap.org' is disabled, please enable 'openweathermap.integration.enaled' property, with proper APIKey.");
 		}
 	}
 
