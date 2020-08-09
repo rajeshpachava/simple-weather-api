@@ -8,11 +8,11 @@
   * Download/Clone the project on to your local machine
   * Run the project on your machine
     - mvn clean install
-  * Update application.properties for property openweathermap.apikey with proper APIKey, and set openweathermap.integration.enaled to true. This is optional, we can also use this weather application without integrating to api.openweathermap.org and populate our own data, recommended for testing purpose.
+  * Update application.properties for property 'openweathermap.apikey' with proper APIKey, and set 'external.weather.api.integration.enabled' to true. This is optional, we can also use this weather application without integrating to api.openweathermap.org and populate our own data, this is recommended for testing purpose.
   * Start spring boot application
     - mvn spring-boot:run
   * Download the swagger specification
-    - ex: curl -X GET -H 'Authorization: Basic ZGVtbzpkZW1v' -i 'http://localhost:8080/swagger.json' (username:password - demo:demo)
+    - ex: curl -X GET -H 'Authorization: Basic ZGVtbzpkZW1v' -i 'http://localhost:8080/weather-api-specification.json' (username:password as demo:demo)
   * The swagger specification will describes the endpoints to populate and retrieve location and weather info and retrieved information using zipcode.
   * Use the location API to populate the locations with zipcode.
   * When enabled the integration with api.openweathermap.org, the application will update temperatures for all the valid locations using zipcode populated the Weather table with temperature information. This update is triggered for every hour.
