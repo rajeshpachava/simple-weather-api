@@ -29,7 +29,7 @@ public class WeatherAppSchedulerConfiguration {
 	//TODO: make this timeout property configurable
 	private static final int HTTP_TIMEOUT = 5000;
 
-	@Value("${openweathermap.integration.enaled}")
+	@Value("${openweathermap.integration.enabled}")
 	private boolean integrationEnabled;
 
 	@Autowired
