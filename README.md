@@ -1,4 +1,4 @@
-# Spring Boot Weather restful API
+# Spring Boot Weather RESTful API
 
 ### Prerequisites
   * JDK 1.8.X
