@@ -30,7 +30,6 @@ public class Weather implements Serializable {
 	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd")
 	@Column(name = "date", nullable = false)
 	@Temporal(TemporalType.DATE)
-//	@Column(name = "date", nullable = false, columnDefinition = "DATE")
 	private Date date;
 
 	@Column(name = "temperature", nullable = false)

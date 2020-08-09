@@ -2,7 +2,6 @@ package com.weather.restapi.util;
 
 import java.util.Calendar;
 import java.util.Date;
-import java.util.TimeZone;
 
 public class DateTimeUtil {
 
