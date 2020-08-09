@@ -28,5 +28,4 @@ public interface WeatherRepository extends JpaRepository<Weather, Long> {
 									  @Param("startDate") Date startDate,
 									  @Param("endDate") Date endDate,
 									  Pageable pageable);
-	
 }
