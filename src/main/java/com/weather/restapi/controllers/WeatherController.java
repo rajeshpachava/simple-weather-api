@@ -29,8 +29,8 @@ public class WeatherController {
 
 	@PutMapping(value = "/add")
 	public void add(@RequestParam Long zipcode,
-					@RequestParam(value = "date") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) Date date,
-					@RequestParam Float temperature) {
+			@RequestParam(value = "date") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) Date date,
+			@RequestParam Float temperature) {
 		Optional<Location> locationInfoFromDb = locationRepository.findByLocationZipCode(zipcode);
 		Location location = locationInfoFromDb.orElseGet(() -> locationRepository.save(new Location(zipcode)));
 
@@ -57,15 +57,15 @@ public class WeatherController {
 
 	@GetMapping(value = "/fetchByZipcodeAndDate")
 	public Optional<Weather> fetchByZipcodeAndDate(@RequestParam Long zipcode,
-												   @RequestParam(value = "date") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) Date date) {
+						       @RequestParam(value = "date") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) Date date) {
 		return weatherRepository.fetchByZipcodeAndDate(zipcode, date);
 	}
 
 	@GetMapping(value = "/fetchAllByZipcodeBetweenDates")
 	public ResponseEntity<?> fetchAllByZipcodeBetweenDates(@RequestParam Long zipcode,
-														   @RequestParam(value = "startDate") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) Date startDate,
-														   @RequestParam(value = "endDate") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) Date endDate,
-														   Pageable pageable) {
+							       @RequestParam(value = "startDate") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) Date startDate,
+							       @RequestParam(value = "endDate") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) Date endDate,
+							       Pageable pageable) {
 		if (startDate.after(endDate)) {
 			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Invalid input request, startDate cannot be greater than endDate");
 		}
