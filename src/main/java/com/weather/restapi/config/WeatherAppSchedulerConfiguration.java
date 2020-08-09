@@ -29,8 +29,8 @@ public class WeatherAppSchedulerConfiguration {
 	//TODO: make this timeout property configurable
 	private static final int HTTP_TIMEOUT = 5000;
 
-	@Value("${openweathermap.integration.enabled}")
-	private boolean integrationEnabled;
+	@Value("${external.weather.api.integration.enabled}")
+	private boolean externalWeatherApiIntegrationEnabled;
 
 	@Autowired
 	WeatherUpdaterService weatherUpdaterService;
@@ -39,9 +39,9 @@ public class WeatherAppSchedulerConfiguration {
 	LocationRepository locationRepository;
 
 	@Bean(name = "restTemplate")
-	public RestTemplate getRestTemplate() {
+	public RestTemplate restTemplate() {
 		RestTemplate restTemplate = new RestTemplate();
-		ClientHttpRequestFactory requestFactory = getClientHttpRequestFactory();
+		ClientHttpRequestFactory requestFactory = createClientHttpRequestFactory();
 		restTemplate.setRequestFactory(requestFactory);
 		return restTemplate;
 	}
@@ -49,7 +49,7 @@ public class WeatherAppSchedulerConfiguration {
 	/*The weather details for all the valid locations are updated for every hour*/
 	@Scheduled(initialDelay = 60_000, fixedRate = 36_00_000)
 	public void triggerWeatherDetailsUpdate() {
-		if (integrationEnabled) {
+		if (externalWeatherApiIntegrationEnabled) {
 			int pageNumber = 0;
 			int elementsInPage;
 			do {
@@ -61,11 +61,11 @@ public class WeatherAppSchedulerConfiguration {
 				}
 			} while (elementsInPage == PAGE_SIZE);
 		} else {
-			log.info("The integration with 'api.openweathermap.org' is disabled, please enable 'openweathermap.integration.enaled' property, with proper APIKey.");
+			log.info("External weather api integration is disabled for fetching weather details.");
 		}
 	}
 
-	private ClientHttpRequestFactory getClientHttpRequestFactory() {
+	private ClientHttpRequestFactory createClientHttpRequestFactory() {
 		HttpComponentsClientHttpRequestFactory requestFactory = new HttpComponentsClientHttpRequestFactory();
 		requestFactory.setConnectionRequestTimeout(HTTP_TIMEOUT);
 		requestFactory.setReadTimeout(HTTP_TIMEOUT);

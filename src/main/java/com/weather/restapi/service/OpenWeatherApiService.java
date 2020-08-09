@@ -53,7 +53,7 @@ public class OpenWeatherApiService implements WeatherUpdaterService {
 	public void updateWeatherDetails(Stream<Location> locationStream) {
 		locationStream.map(l -> invokeWeatherApi(restTemplate, url, apiKey, l))
 				.filter(Objects::nonNull)
-				.forEach(w -> persistWeatherDetails(w));
+				.forEach(this::persistWeatherDetails);
 	}
 
 	private void persistWeatherDetails(Weather weather) {

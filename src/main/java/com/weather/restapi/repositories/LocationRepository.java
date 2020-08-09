@@ -10,7 +10,7 @@ import java.util.Optional;
 @Repository
 public interface LocationRepository extends JpaRepository<Location, Long> {
 
-	@Query("SELECT  li FROM Location li WHERE li.zipcode = :zipcode")
+	@Query("SELECT location FROM Location location WHERE location.zipcode = :zipcode")
 	Optional<Location> findByLocationZipCode(Long zipcode);
 
 }
