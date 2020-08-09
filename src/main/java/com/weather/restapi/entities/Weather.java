@@ -27,9 +27,9 @@ public class Weather implements Serializable {
 	@JsonIgnore
 	private Location location;
 
-	@JsonFormat(pattern = "yyyy-MM-dd")
+	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd")
 	@Column(name = "date", nullable = false)
-//	@Temporal(TemporalType.DATE)
+	@Temporal(TemporalType.DATE)
 //	@Column(name = "date", nullable = false, columnDefinition = "DATE")
 	private Date date;
 
