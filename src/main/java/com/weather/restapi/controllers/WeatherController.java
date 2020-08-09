@@ -34,7 +34,8 @@ public class WeatherController {
 		Optional<Location> locationInfoFromDb = locationRepository.findByLocationZipCode(zipcode);
 		Location location = locationInfoFromDb.orElseGet(() -> locationRepository.save(new Location(zipcode)));
 
-		Optional<Weather> weather = weatherRepository.fetchByZipcodeAndDate(location.getZipcode(), DateTimeUtil.getDateWithStartOfTheDay(date));
+// 		Optional<Weather> weather = weatherRepository.fetchByZipcodeAndDate(location.getZipcode(), DateTimeUtil.getDateWithStartOfTheDay(date));
+		Optional<Weather> weather = weatherRepository.fetchByZipcodeAndDate(location.getZipcode(), date);
 		Weather updated;
 		if (weather.isPresent()) {
 			updated = weather.get();
