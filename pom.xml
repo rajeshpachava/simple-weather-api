@@ -5,11 +5,11 @@
 
     <groupId>com.weather</groupId>
     <artifactId>weather-api</artifactId>
-    <version>0.0.1-SNAPSHOT</version>
+    <version>1.0</version>
     <packaging>jar</packaging>
 
-    <name>demo</name>
-    <description>Demo project for Spring Boot</description>
+    <name>weather-api</name>
+    <description>Weather application for managing historial weather details.</description>
 
     <parent>
         <groupId>org.springframework.boot</groupId>
