@@ -4,6 +4,7 @@ import com.weather.restapi.entities.Location;
 import com.weather.restapi.entities.Weather;
 import com.weather.restapi.repositories.LocationRepository;
 import com.weather.restapi.repositories.WeatherRepository;
+import com.weather.restapi.util.DateTimeUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -27,12 +28,21 @@ public class WeatherController {
 	WeatherRepository weatherRepository;
 
 	@PutMapping(value = "/add")
-	public void addWeatherDetails(@RequestParam Long zipcode,
-								  @RequestParam(value = "date") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) Date date,
-								  @RequestParam Double temperature) {
+	public void add(@RequestParam Long zipcode,
+					@RequestParam(value = "date") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) Date date,
+					@RequestParam Float temperature) {
 		Optional<Location> locationInfoFromDb = locationRepository.findByLocationZipCode(zipcode);
 		Location location = locationInfoFromDb.orElseGet(() -> locationRepository.save(new Location(zipcode)));
-		weatherRepository.save(new Weather(location, date, temperature));
+
+		Optional<Weather> weather = weatherRepository.fetchByZipcodeAndDate(location.getZipcode(), DateTimeUtil.getDateWithStartOfTheDay(date));
+		Weather updated;
+		if (weather.isPresent()) {
+			updated = weather.get();
+			updated.setTemperature(temperature);
+		} else {
+			updated = new Weather(location, date, temperature);
+		}
+		weatherRepository.saveAndFlush(updated);
 	}
 
 	@GetMapping(value = "/fetchAll")

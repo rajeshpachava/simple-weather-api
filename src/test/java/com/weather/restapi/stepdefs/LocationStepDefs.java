@@ -3,7 +3,6 @@ package com.weather.restapi.stepdefs;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.weather.restapi.WeatherApplication;
 import com.weather.restapi.entities.Location;
-import com.weather.restapi.entities.Weather;
 import com.weather.restapi.util.RestApiClient;
 import com.weather.restapi.util.RestApiResponse;
 import cucumber.api.DataTable;

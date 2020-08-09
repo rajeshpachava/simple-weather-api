@@ -57,4 +57,12 @@ public class Location implements Serializable {
 	public int hashCode() {
 		return Objects.hash(id, zipcode);
 	}
+
+	@Override
+	public String toString() {
+		return "Location{" +
+				"id=" + id +
+				", zipcode=" + zipcode +
+				'}';
+	}
 }

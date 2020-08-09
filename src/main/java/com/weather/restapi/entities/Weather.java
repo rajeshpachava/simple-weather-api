@@ -21,24 +21,25 @@ public class Weather implements Serializable {
 	@JoinColumn(name = "id", nullable = false)
 	private Long id;
 
-	@ManyToOne(fetch = FetchType.LAZY, optional = false)
+	@ManyToOne(fetch = FetchType.EAGER, optional = false)
 	@JoinColumn(name = "locationId", referencedColumnName = "id", nullable = false)
 	@OnDelete(action = OnDeleteAction.CASCADE)
 	@JsonIgnore
 	private Location location;
 
-	@JoinColumn(name = "date", nullable = false)
 	@JsonFormat(pattern = "yyyy-MM-dd")
+	@Temporal(TemporalType.DATE)
+	@Column(name = "date", columnDefinition = "DATE")
 	private Date date;
 
-	@JoinColumn(name = "temperature", nullable = false)
-	private Double temperature;
+	@Column(name = "temperature", nullable = false)
+	private Float temperature;
 
 
 	public Weather() {
 	}
 
-	public Weather(Location location, Date date, Double temperature) {
+	public Weather(Location location, Date date, Float temperature) {
 		this.location = location;
 		this.date = date;
 		this.temperature = temperature;
@@ -68,11 +69,11 @@ public class Weather implements Serializable {
 		this.date = date;
 	}
 
-	public Double getTemperature() {
+	public Float getTemperature() {
 		return temperature;
 	}
 
-	public void setTemperature(Double temperature) {
+	public void setTemperature(Float temperature) {
 		this.temperature = temperature;
 	}
 
@@ -89,5 +90,15 @@ public class Weather implements Serializable {
 	@Override
 	public int hashCode() {
 		return Objects.hash(id, location, date, temperature);
+	}
+
+	@Override
+	public String toString() {
+		return "Weather{" +
+				"id=" + id +
+				", location=" + location +
+				", date=" + date +
+				", temperature=" + temperature +
+				'}';
 	}
 }

@@ -2,7 +2,7 @@
 Feature: Weather rest API endpoint tests
 
 
-  Scenario: The application is started and data is populated in the Weather table
+  Background: The application is started and data is populated in the Weather table
     Given the application has started successfully
     When the following data is added to the Weather table
       | zipcode | date       | temperature |
@@ -96,12 +96,12 @@ Feature: Weather rest API endpoint tests
     When I request weather details using zipcode "<zipcode>", startDate "<startDate>", endDate "<endDate>", page "<page>", size "<size>" and sort "<sort>"
     Then I expect in the response the status code is "<statusCode>"
     Examples:
-      | zipcode | startDate  | endDate    | page | size | sort                       | statusCode |
-      | 100x    | 2020-01-0x | 2020-01-04 | 0    | 5    | date,asc                   | 400        |
-      | 1001    | 2020-01-0x | 2020-01-04 | 0    | 5    | date,asc                   | 400        |
-      | 1001    | 2020-01-32 | 2020-01-04 | 0    | 5    | date,asc                   | 400        |
-      | 1001    | 2020-13-32 | 2020-01-04 | 0    | 5    | date,asc                   | 400        |
-      | 1001    | 2020-13-32 | 2020-32-32 | 0    | 5    | date,asc                   | 400        |
-      | 1001    | 2020-12-31 | 2020-12-12 | 0    | 1    | date,asc                   | 400        |
-      | 1001    | 2020-11-02 | 2020-12-12 | 1    | 1    | unknownColumn,asc          | 500        |
-      | 1001    | 2020-11-02 | 2020-12-12 | 1    | 1    | date,unknowSortingStrategy | 500        |
+      | zipcode | startDate  | endDate    | page | size | sort                        | statusCode |
+      | 100x    | 2020-01-0x | 2020-01-04 | 0    | 5    | date,asc                    | 400        |
+      | 1001    | 2020-01-0x | 2020-01-04 | 0    | 5    | date,asc                    | 400        |
+      | 1001    | 2020-01-32 | 2020-01-04 | 0    | 5    | date,asc                    | 400        |
+      | 1001    | 2020-13-32 | 2020-01-04 | 0    | 5    | date,asc                    | 400        |
+      | 1001    | 2020-13-32 | 2020-32-32 | 0    | 5    | date,asc                    | 400        |
+      | 1001    | 2020-12-31 | 2020-12-12 | 0    | 1    | date,asc                    | 400        |
+      | 1001    | 2020-11-02 | 2020-12-12 | 1    | 1    | unknownColumn,asc           | 500        |
+      | 1001    | 2020-11-02 | 2020-12-12 | 1    | 1    | date,unknownSortingStrategy | 500        |

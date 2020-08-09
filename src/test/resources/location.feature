@@ -2,7 +2,7 @@
 Feature: Location rest API endpoint tests
 
 
-  Scenario: The application is started and data is populated in the Location table
+  Background: The weather application is started and data is populated in the Location table
     Given the application has started successfully
     When the following data is added to the Location table
       | zipcode |
@@ -25,7 +25,7 @@ Feature: Location rest API endpoint tests
       | 1005    | {"id":2,"zipcode":1005} |
       | 1006    | null                    |
 
-  Scenario Outline: Requesting location data using fetchAll endpoint and using pagination
+  Scenario Outline: Requesting location data using fetchAll endpoint
     When I provide page number "<page>", size "<size>" and sort "<sort>"
     Then I expect in the response the content as "<content>"
     Examples:
@@ -44,7 +44,7 @@ Feature: Location rest API endpoint tests
       | 2    | 10   | id,desc      | []                                                                                                                        |
 
 
-  Scenario Outline: Requesting location data using fetchByZipcode endpoint and invalid input
+  Scenario Outline: Requesting location data using fetchByZipcode endpoint with invalid input
     When I request location by zipcode "<zipcode>"
     Then I expect in the response the status code as "<statusCode>"
     Examples:
@@ -53,5 +53,6 @@ Feature: Location rest API endpoint tests
       | 123x                                      | 400        |
       | 10060000000000000000000000000000000000000 | 400        |
       | xyz                                       | 400        |
+      | 10.0                                      | 400        |
 
 
