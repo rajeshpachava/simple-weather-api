@@ -3,7 +3,7 @@
 ### Prerequisites
   * JDK 1.8.X
   * Maven 3.6.X
-  * APIKey for api.openweathermap.org 
+  * APIKey for integrating with external weather API provider(api.openweathermap.org)
 ### Run 
   * Download/Clone the project on to your local machine
   * Run the project on your machine
