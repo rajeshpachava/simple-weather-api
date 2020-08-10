@@ -4,7 +4,6 @@ import com.weather.restapi.entities.Location;
 import com.weather.restapi.entities.Weather;
 import com.weather.restapi.repositories.LocationRepository;
 import com.weather.restapi.repositories.WeatherRepository;
-import com.weather.restapi.util.DateTimeUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -34,7 +33,7 @@ public class WeatherController {
 		Optional<Location> locationInfoFromDb = locationRepository.findByLocationZipCode(zipcode);
 		Location location = locationInfoFromDb.orElseGet(() -> locationRepository.save(new Location(zipcode)));
 
-		Optional<Weather> weather = weatherRepository.fetchByZipcodeAndDate(location.getZipcode(), DateTimeUtil.getDateWithStartOfTheDay(date));
+		Optional<Weather> weather = weatherRepository.fetchByZipcodeAndDate(location.getZipcode(), date);
 		Weather weatherToPersist;
 		if (weather.isPresent()) {
 			weatherToPersist = weather.get();

@@ -6,7 +6,6 @@ import com.weather.restapi.entities.Location;
 import com.weather.restapi.entities.Weather;
 import com.weather.restapi.repositories.LocationRepository;
 import com.weather.restapi.repositories.WeatherRepository;
-import com.weather.restapi.util.DateTimeUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -32,22 +31,16 @@ import java.util.stream.Stream;
 public class OpenWeatherApiService implements WeatherUpdaterService {
 
 	private static final Logger log = LoggerFactory.getLogger(MethodHandles.lookup().lookupClass());
-
-	@Value("${openweathermap.api.url}")
-	private String url;
-
-	@Value("${openweathermap.apikey}")
-	private String apiKey;
-
 	@Autowired
 	RestTemplate restTemplate;
-
 	@Autowired
 	LocationRepository locationRepository;
-
 	@Autowired
 	WeatherRepository weatherRepository;
-
+	@Value("${openweathermap.api.url}")
+	private String url;
+	@Value("${openweathermap.apikey}")
+	private String apiKey;
 	private UriComponentsBuilder uriComponentsBuilder;
 
 	public void updateWeatherDetails(Stream<Location> locationStream) {
@@ -100,7 +93,7 @@ public class OpenWeatherApiService implements WeatherUpdaterService {
 			if (temp != null && !"".equals(temp)) {
 				float kelvin = Float.parseFloat(temp.toString());
 				float celsius = kelvin - 273.15F;
-				return new Weather(location, DateTimeUtil.getDateWithStartOfTheDay(new Date()), celsius);
+				return new Weather(location, new Date(), celsius);
 			}
 		}
 		return null;
