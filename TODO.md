@@ -8,6 +8,7 @@ Or else just convert to date time using the timestamp and timezone information a
 * Persit the users in DB istead of maintaining in memory.
 * Support of HTTPS required.
 * Add more endpoints to the Weather API, like fetchByZipcodeForCurrentDay(), fetchByZipcodeForPreviousDay(), fetchByZipcodeForLast7Days(), fetchByZipcodeForLast30Days().
+* Need to use spring transaction and properly manage the persisting and read of entities with in the transactions.
 * Make HTTP client connection timeout property configurable.
 * Create application.properties with production profile for integrating with external databases.
 * Add support for monitoring and integrate with monitoring tools like prometheus and graphana.
